@@ -7,12 +7,12 @@ var variation = 0.1; // percent
 var end_time = 300;
 var recede_time = 210;
 
-var shards = 20;
+var shards = 1000;
 var publishes = 0;
 var filtered = 0;
 var total_publish = 0;
 var total_filtered = 0;
-var shards_min = 20;
+var shards_min = 1000;
 var shards_max = 1;
 var publishes_max = 0;
 var filtered_max = 0;
@@ -31,12 +31,12 @@ function reset(){
     end_time = 300;
     recede_time = 210;
 
-    shards = 20;
+    shards = 1000;
     publishes = 0;
     filtered = 0;
     total_publish = 0;
     total_filtered = 0;
-    shards_min = 20;
+    shards_min = 1000;
     shards_max = 1;
     publishes_max = 0;
     filtered_max = 0;
@@ -92,6 +92,7 @@ function rampUsers(){
     total_filtered += filtered;
 
     publishes_max = (publishes > publishes_max ? publishes : publishes_max);
+    shards_min = (shards < shards_min ? shards : shards_min);
     shards_max = (shards > shards_max ? shards : shards_max);
     filtered_max = (filtered > filtered_max ? filtered : filtered_max);
 }
