@@ -1,0 +1,450 @@
+<!--
+ * CoreUI - Open Source Bootstrap Admin Template
+ * @version v1.0.1
+ * @link http://coreui.io
+ * Copyright (c) 2017 creativeLabs Łukasz Holeczek
+ * @license MIT
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="CoreUI - Open Source Bootstrap Admin Template">
+  <meta name="author" content="Łukasz Holeczek">
+  <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,AngularJS,Angular,Angular2,Angular 2,Angular4,Angular 4,jQuery,CSS,HTML,RWD,Dashboard,React,React.js,Vue,Vue.js">
+  <link rel="shortcut icon" href="img/favicon.png">
+  <title>CoreUI - Open Source Bootstrap Admin Template</title>
+
+  <!-- Icons -->
+  <link href="node_modules/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="node_modules/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
+  <link href="//code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css" rel="stylesheet">
+
+  <!-- Main styles for this application -->
+  <link href="css/style.css" rel="stylesheet">
+  <link href="css/jasdeep.css" rel="stylesheet">
+  <!-- Styles required by this views -->
+
+</head>
+
+<!-- BODY options, add following classes to body to change options
+
+// Header options
+1. '.header-fixed'					- Fixed Header
+
+// Brand options
+1. '.brand-minimized'       - Minimized brand (Only symbol)
+
+// Sidebar options
+1. '.sidebar-fixed'					- Fixed Sidebar
+2. '.sidebar-hidden'				- Hidden Sidebar
+3. '.sidebar-off-canvas'		- Off Canvas Sidebar
+4. '.sidebar-minimized'			- Minimized Sidebar (Only icons)
+5. '.sidebar-compact'			  - Compact Sidebar
+
+// Aside options
+1. '.aside-menu-fixed'			- Fixed Aside Menu
+2. '.aside-menu-hidden'			- Hidden Aside Menu
+3. '.aside-menu-off-canvas'	- Off Canvas Aside Menu
+
+// Breadcrumb options
+1. '.breadcrumb-fixed'			- Fixed Breadcrumb
+
+// Footer options
+1. '.footer-fixed'					- Fixed footer
+
+-->
+
+<body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden">
+  <header class="app-header navbar">
+    <button class="navbar-toggler mobile-sidebar-toggler d-lg-none mr-auto" type="button">☰</button>
+    <a class="navbar-brand" href="#">PubNub & FanHero</a>
+    <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button">☰</button>
+
+  </header>
+
+  <div class="app-body">
+    <div class="sidebar">
+      <nav class="sidebar-nav">
+        <ul class="nav">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html"><i class="icon-speedometer"></i> Dashboard </a>
+          </li>
+
+        </ul>
+      </nav>
+      <button class="sidebar-minimizer brand-minimizer" type="button"></button>
+    </div>
+
+    <!-- Main content -->
+    <main class="main">
+
+      <div class="container-fluid padded">
+        <div class="animated fadeIn">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header">
+                  Traffic Simulation
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-sm-12 col-lg-4">
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <div class="callout callout-info">
+                            <small class="text-muted">Current Users</small>
+                            <br>
+                            <strong class="h4"><span id="users-current" onchange="console.log('changed');" class="small">0</span></strong>
+                            <div class="chart-wrapper">
+                              <canvas id="sparkline-chart-1" width="100" height="30"></canvas>
+                            </div>
+                          </div>
+                        </div>
+                        <!--/.col-->
+                        <div class="col-sm-6">
+                          <div class="callout callout-info">
+                            <small class="text-muted">Max Users</small>
+                            <br>
+                            <strong class="h4"><span id="users-max" class="small">0</span></strong>
+                            <div class="chart-wrapper">
+                              <canvas id="sparkline-chart-2" width="100" height="30"></canvas>
+                            </div>
+                          </div>
+                        </div>
+                        <!--/.col-->
+                      </div>
+                      <!--/.row-->
+                      <hr class="mt-0">
+                      <ul class="horizontal-bars type-2">
+                        <li>
+                          <i class="icon-user"></i>
+                          <span class="title">Users</span>
+                          <span class="value"><span id="iuser">0</span></span>
+                        </li>
+                        <li>
+                          <i class="fa fa-align-justify"></i>
+                          <span class="title">Shards</span>
+                          <span class="value"><span id="ishard">0</span></span>
+                        </li>
+                        <li>
+                          <i class="fa fa-chevron-circle-up"></i>
+                          <span class="title">Publish/s</span>
+                          <span class="value"><span id="ipublish">0</span></span>
+                        </li>
+                        <li>
+                          <i class="fa fa-chevron-circle-down"></i>
+                          <span class="title">Filtered/s</span>
+                          <span class="value"><span id="ifilter">0</span></span>
+                        </li>
+                        <li>
+                          <i class="fa fa-chevron-circle-down"></i>
+                          <span class="title">Filtered Max</span>
+                          <span class="value"><span id="ifilter-max">0</span></span>
+                        </li>
+                      </ul>
+                      <!--<ul class="horizontal-bars">
+                        <li>
+                          <div class="title">
+                            Monday
+                          </div>
+                          <div class="bars">
+                            <div class="progress progress-xs">
+                              <div class="progress-bar bg-info" role="progressbar" style="width: 34%" aria-valuenow="34" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <div class="progress progress-xs">
+                              <div class="progress-bar bg-danger" role="progressbar" style="width: 78%" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="title">
+                            Tuesday
+                          </div>
+                          <div class="bars">
+                            <div class="progress progress-xs">
+                              <div class="progress-bar bg-info" role="progressbar" style="width: 56%" aria-valuenow="56" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <div class="progress progress-xs">
+                              <div class="progress-bar bg-danger" role="progressbar" style="width: 94%" aria-valuenow="94" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="title">
+                            Wednesday
+                          </div>
+                          <div class="bars">
+                            <div class="progress progress-xs">
+                              <div class="progress-bar bg-info" role="progressbar" style="width: 12%" aria-valuenow="12" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <div class="progress progress-xs">
+                              <div class="progress-bar bg-danger" role="progressbar" style="width: 67%" aria-valuenow="67" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="title">
+                            Thursday
+                          </div>
+                          <div class="bars">
+                            <div class="progress progress-xs">
+                              <div class="progress-bar bg-info" role="progressbar" style="width: 43%" aria-valuenow="43" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <div class="progress progress-xs">
+                              <div class="progress-bar bg-danger" role="progressbar" style="width: 91%" aria-valuenow="91" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="title">
+                            Friday
+                          </div>
+                          <div class="bars">
+                            <div class="progress progress-xs">
+                              <div class="progress-bar bg-info" role="progressbar" style="width: 22%" aria-valuenow="22" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <div class="progress progress-xs">
+                              <div class="progress-bar bg-danger" role="progressbar" style="width: 73%" aria-valuenow="73" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="title">
+                            Saturday
+                          </div>
+                          <div class="bars">
+                            <div class="progress progress-xs">
+                              <div class="progress-bar bg-info" role="progressbar" style="width: 53%" aria-valuenow="53" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <div class="progress progress-xs">
+                              <div class="progress-bar bg-danger" role="progressbar" style="width: 82%" aria-valuenow="82" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="title">
+                            Sunday
+                          </div>
+                          <div class="bars">
+                            <div class="progress progress-xs">
+                              <div class="progress-bar bg-info" role="progressbar" style="width: 9%" aria-valuenow="9" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <div class="progress progress-xs">
+                              <div class="progress-bar bg-danger" role="progressbar" style="width: 69%" aria-valuenow="69" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                          </div>
+                        </li>
+                        <li class="legend">
+                          <span class="badge badge-pill badge-info"></span>
+                          <small>New clients</small> &nbsp;
+                          <span class="badge badge-pill badge-danger"></span>
+                          <small>Recurring clients</small>
+                        </li>
+                      </ul>-->
+                    </div>
+                    <!--/.col-->
+                    <div class="col-sm-6 col-lg-4">
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <div class="callout callout-danger">
+                            <small class="text-muted">Shards Min</small>
+                            <br>
+                            <strong class="h4"><span id="shards-min" class="small">0</span></strong>
+                            <div class="chart-wrapper">
+                              <canvas id="sparkline-chart-3" width="100" height="30"></canvas>
+                            </div>
+                          </div>
+                        </div>
+                        <!--/.col-->
+                        <div class="col-sm-6">
+                          <div class="callout callout-danger">
+                            <small class="text-muted">Shards Max</small>
+                            <br>
+                            <strong class="h4"><span id="shards-max" class="small">0</span></strong>
+                            <div class="chart-wrapper">
+                              <canvas id="sparkline-chart-4" width="100" height="30"></canvas>
+                            </div>
+                          </div>
+                        </div>
+                        <!--/.col-->
+                      </div>
+                      <!--/.row-->
+                      <hr class="mt-0">
+                      <ul class="horizontal-bars type-2">
+                        <li>
+                          <i class="fa fa-chevron-circle-up"></i>
+                          <span class="title">Total Publishes</span>
+                          <span class="value"><span id="itotalpublish">0</span></span>
+                        </li>
+                        <li>
+                          <i class="fa fa-chevron-circle-down"></i>
+                          <span class="title">Total Filtered</span>
+                          <span class="value"><span id="itotalfilter">0</span></span>
+                        </li>
+                        <li>
+                          <i class="fa fa-chevron-circle-down"></i>
+                          <span class="title">AVG Filtered/second</span>
+                          <span class="value"><span id="iavgfilter">0</span></span>
+                        </li>
+                        <li>
+                          <i class="fa fa-chevron-circle-down"></i>
+                          <span class="title">Shard Ratio</span>
+                          <span class="value">Publish / <span id="ishardratio">0</span></span>
+                        </li>
+                      </ul>
+                      <!--<ul class="horizontal-bars type-2">
+                        <li>
+                          <i class="icon-user"></i>
+                          <span class="title">Male</span>
+                          <span class="value">43%</span>
+                          <div class="bars">
+                            <div class="progress progress-xs">
+                              <div class="progress-bar bg-warning" role="progressbar" style="width: 43%" aria-valuenow="43" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                          </div>
+                        </li>
+                        <li>
+                          <i class="icon-user-female"></i>
+                          <span class="title">Female</span>
+                          <span class="value">37%</span>
+                          <div class="bars">
+                            <div class="progress progress-xs">
+                              <div class="progress-bar bg-warning" role="progressbar" style="width: 37%" aria-valuenow="37" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                          </div>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                          <i class="icon-globe"></i>
+                          <span class="title">Organic Search</span>
+                          <span class="value">191,235
+                            <span class="text-muted small">(56%)</span>
+                          </span>
+                          <div class="bars">
+                            <div class="progress progress-xs">
+                              <div class="progress-bar bg-success" role="progressbar" style="width: 56%" aria-valuenow="56" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                          </div>
+                        </li>
+                        <li>
+                          <i class="icon-social-facebook"></i>
+                          <span class="title">Facebook</span>
+                          <span class="value">51,223
+                            <span class="text-muted small">(15%)</span>
+                          </span>
+                          <div class="bars">
+                            <div class="progress progress-xs">
+                              <div class="progress-bar bg-success" role="progressbar" style="width: 15%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                          </div>
+                        </li>
+                        <li>
+                          <i class="icon-social-twitter"></i>
+                          <span class="title">Twitter</span>
+                          <span class="value">37,564
+                            <span class="text-muted small">(11%)</span>
+                          </span>
+                          <div class="bars">
+                            <div class="progress progress-xs">
+                              <div class="progress-bar bg-success" role="progressbar" style="width: 11%" aria-valuenow="11" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                          </div>
+                        </li>
+                        <li>
+                          <i class="icon-social-linkedin"></i>
+                          <span class="title">LinkedIn</span>
+                          <span class="value">27,319
+                            <span class="text-muted small">(8%)</span>
+                          </span>
+                          <div class="bars">
+                            <div class="progress progress-xs">
+                              <div class="progress-bar bg-success" role="progressbar" style="width: 8%" aria-valuenow="8" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                          </div>
+                        </li>
+                        <li class="divider text-center">
+                          <button type="button" class="btn btn-sm btn-link text-muted" data-toggle="tooltip" data-placement="top" title="" data-original-title="show more"><i class="icon-options"></i></button>
+                        </li>
+                      </ul>-->
+                    </div>
+                    <!--/.col-->
+                    <div class="col-sm-6 col-lg-4">
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <div class="callout">
+                            <small class="text-muted">Time Elapsed</small>
+                            <br>
+                            <strong class="h4"><span id="time-elapsed" class="small">00:00:00</span></strong>
+                            <div class="chart-wrapper">
+                              <canvas id="sparkline-chart-5" width="100" height="30"></canvas>
+                            </div>
+                          </div>
+                        </div>
+                        <!--/.col-->
+                        <div class="col-sm-6">
+                          <div class="callout">
+                            <small class="text-muted">Max Publ/s</small>
+                            <br>
+                            <strong class="h4"><span id="pub-max" class="small">0</span></strong>
+                            <div class="chart-wrapper">
+                              <canvas id="sparkline-chart-6" width="100" height="30"></canvas>
+                            </div>
+                          </div>
+                        </div>
+                        <!--/.col-->
+                      </div>
+                      <!--/.row-->
+                      <hr class="mt-0">
+
+                    </div>
+                    <!--/.col-->
+                  </div>
+                  <!--/.row-->
+                  <br>
+                </div>
+              </div>
+            </div>
+            <!--/.col-->
+          </div>
+          <!--/.row-->
+          <div class="row">
+            <div class="col-md-12">
+
+              Shard Ratio <input id="spinner" /><br >
+              <button id="run" class="btn btn-primary">run</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.container-fluid -->
+    </main>
+
+  </div>
+
+  <footer class="app-footer">
+    <span>Created by Jasdeep Jaitla, Senior Solution Architect</span>
+    <span class="ml-auto">PubNub, Inc.</span>
+  </footer>
+
+  <!-- Bootstrap and necessary plugins -->
+  <script src="node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
+  <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="node_modules/pace-progress/pace.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+          integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+          crossorigin="anonymous"></script>
+  <!-- GenesisUI main scripts -->
+
+  <script src="js/app.js"></script>
+
+  <!-- Plugins and scripts required by this views -->
+
+  <!-- Custom scripts required by this view -->
+  <script src="js/views/main.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,11 @@
+.main .container-fluid {
+    padding-top: 10px
+}
+
+.app-header.navbar .navbar-brand {
+    background-image: none;
+}
+
+.small {
+    font-size: 70%;
+}
